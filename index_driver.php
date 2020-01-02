@@ -3,18 +3,21 @@
     session_start();
     $dao = new DAO;
     $itemList = $dao->getItemList();
-    //$_SESSION['itemList'] = $itemList;
+    
     foreach ($itemList as $item){
         $tableRow = array('name' => $item['name']);
-        $tableRow ['user'] = $item['user'];
+        $tableRow['user'] = $item['user'];
+        $tableRow['deadline'] = $item['deadline'];
         
+        if (is_null($item['end_date'])){
+            $tableRow['end_date'] = '未完了';
+        }else{
+            $tableRow['end_date'] = $item['end_date'];
+        }
+
         $tableRows[] = $tableRow;
     }
-    
-    foreach($tableRows as $row){
-        echo $row['name'];
-        echo $row['user'];
-    }
+        $_SESSION['itemList'] = $tableRows;
 
-    //header('Location: http://localhost/php_todo3/index.php'); 
+    header('Location: http://localhost/php_todo3/index.php'); 
 ?>
