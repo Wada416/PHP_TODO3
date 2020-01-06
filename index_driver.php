@@ -6,6 +6,7 @@
     
     foreach ($itemList as $item){
         $tableRow = array('name' => $item['name']);
+        $tableRow['id'] = $item['id'];
         $tableRow['user'] = $item['user'];
         $tableRow['deadline'] = $item['deadline'];
         
